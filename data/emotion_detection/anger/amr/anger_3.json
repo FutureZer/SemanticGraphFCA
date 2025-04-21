@@ -1,0 +1,2 @@
+{"id": "0", "input": "I am furious!", "nodes": [{"id": 0, "label": "i"}, {"id": 1, "label": "furious-02"}], "edges": [{"source": 1, "target": 0, "label": "arg1"}], "tops": [1], "framework": "amr", "time": "2025-04-11"}
+{"id": "1", "input": "This is unacceptable!", "nodes": [{"id": 0, "label": "this"}, {"id": 1, "label": "accept-01"}, {"id": 2, "label": "possible-01", "properties": ["polarity"], "values": ["-"]}], "edges": [{"source": 2, "target": 1, "label": "arg1"}, {"source": 1, "target": 0, "label": "arg1"}], "tops": [2], "framework": "amr", "time": "2025-04-11"}
