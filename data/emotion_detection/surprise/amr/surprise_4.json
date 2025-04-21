@@ -1,0 +1,2 @@
+{"id": "0", "input": "Are you serious?", "nodes": [{"id": 0, "label": "you"}, {"id": 1, "label": "serious-01"}, {"id": 2, "label": "amr-unknown"}], "edges": [{"source": 1, "target": 0, "label": "arg1"}, {"source": 1, "target": 2, "label": "polarity"}], "tops": [1], "framework": "amr", "time": "2025-04-11"}
+{"id": "1", "input": "I am in shock!", "nodes": [{"id": 0, "label": "i"}, {"id": 1, "label": "shock-01"}], "edges": [{"source": 1, "target": 0, "label": "arg1"}], "tops": [1], "framework": "amr", "time": "2025-04-11"}

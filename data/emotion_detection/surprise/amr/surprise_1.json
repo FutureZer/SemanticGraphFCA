@@ -1,0 +1,2 @@
+{"id": "0", "input": "Wow!", "nodes": [{"id": 0, "label": "wow-01", "properties": ["mode"], "values": ["expressive"]}], "edges": [], "tops": [0], "framework": "amr", "time": "2025-04-11"}
+{"id": "1", "input": "This is amazing!", "nodes": [{"id": 0, "label": "this"}, {"id": 1, "label": "amaze-01", "properties": ["mode"], "values": ["expressive"]}], "edges": [{"source": 1, "target": 0, "label": "arg0"}], "tops": [1], "framework": "amr", "time": "2025-04-11"}
