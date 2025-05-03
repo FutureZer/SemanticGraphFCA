@@ -1,3 +1,4 @@
+from graph_preprocessing import process_empty_nodes
 from graph_visualize import visualize_graph_list
 from parse import from_dict
 from read_dataset import load_graphs
@@ -348,13 +349,24 @@ amr_data = {
 
 if __name__ == "__main__":
     # Define the path to your dataset and the notation you want to load
-    dataset_path = "data\\emotion_detection"  # Replace with the actual path
+    dataset_path = "data\\bbcsport"  # Replace with the actual path
 
     # Load the data
-    loaded_amr_graphs = load_graphs(dataset_path, "amr")
-    loaded_eds_graphs = load_graphs(dataset_path, "eds")
+    #loaded_amr_graphs = load_graphs(dataset_path, "amr")
+    #loaded_drg_graphs = load_graphs(dataset_path, "drg")
+    #loaded_eds_graphs = load_graphs(dataset_path, "eds")
+    #loaded_ptg_graphs = load_graphs(dataset_path, "ptg")
     loaded_ucca_graphs = load_graphs(dataset_path, "ucca")
 
-    visualize_graph_list(loaded_amr_graphs['joy'])
-    visualize_graph_list(loaded_eds_graphs['joy'])
-    visualize_graph_list(loaded_ucca_graphs['joy'])
+    #visualize_graph_list(loaded_amr_graphs['athletics'][:100])
+    #visualize_graph_list(loaded_drg_graphs['athletics'][:100])
+    #visualize_graph_list(loaded_eds_graphs['athletics'][:100])
+    #visualize_graph_list(loaded_ptg_graphs['athletics'][:100])
+    visualize_graph_list(loaded_ucca_graphs['athletics'][:100])
+
+    preprocessed_graphs = []
+    for ucca_graph in loaded_ucca_graphs['athletics'][:100]:
+        preprocessed_graphs.append(process_empty_nodes(ucca_graph))
+
+    visualize_graph_list(preprocessed_graphs, "preprocessed")
+

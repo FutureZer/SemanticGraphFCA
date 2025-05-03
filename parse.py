@@ -1,6 +1,8 @@
 from graph_model import Node, RichNode, Edge, SemanticGraph
 from typing import List, Dict, Any, Optional
 
+from graph_preprocessing import preprocess_ucca_tokens, process_empty_nodes
+
 
 def _get_text_from_anchors(sentence: str, anchors: Optional[List[Dict[str, int]]]) -> Optional[str]:
     """Extracts the text segment based on the provided anchor information."""
@@ -75,5 +77,9 @@ def from_dict(data: Dict[str, Any]) -> 'SemanticGraph':
     nodes = _parse_nodes(data.get('nodes', []), input_text, framework)
     edges = _parse_edges(data.get('edges', []))
 
-    return SemanticGraph(graph_id=graph_id, input_text=input_text, nodes=nodes,
-                         edges=edges, tops=tops, framework=framework, timestamp=timestamp)
+    graph = SemanticGraph(graph_id=graph_id, input_text=input_text, nodes=nodes,
+                          edges=edges, tops=tops, framework=framework, timestamp=timestamp)
+
+    graph = preprocess_ucca_tokens(graph)
+
+    return graph

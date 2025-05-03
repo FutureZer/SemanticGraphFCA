@@ -55,7 +55,7 @@ def visualize_semantic_graph(semantic_graph: SemanticGraph, output_path: str) ->
         print(f"An error occurred during Graphviz rendering: {e}")
 
 
-def visualize_graph_list(semantic_graphs: List[SemanticGraph]) -> None:
+def visualize_graph_list(semantic_graphs: List[SemanticGraph], path='') -> None:
     """
     Visualizes a list of SemanticGraph objects and saves each visualization
     to a temporary directory organized by framework.
@@ -63,9 +63,9 @@ def visualize_graph_list(semantic_graphs: List[SemanticGraph]) -> None:
     Args:
         semantic_graphs: A list of SemanticGraph objects to visualize.
     """
-
     for graph in semantic_graphs:
-        framework_dir = os.path.join(VIS_DIR, graph.framework)
+        full_path = os.path.join(VIS_DIR, path)
+        framework_dir = os.path.join(full_path, graph.framework)
         os.makedirs(framework_dir, exist_ok=True)
         output_filename_base = os.path.join(framework_dir, str(graph.id))
         visualize_semantic_graph(graph, output_filename_base)
