@@ -31,43 +31,43 @@ class RichNode(Node):
     Extended node class for frameworks like PTG and EDS, which include
     additional properties, values, and a distinct concept label.
 
-    Inherits 'id' and 'label' (derived from anchors) from the base Node class.
     """
     def __init__(self,
                  node_id: Union[int, str],
                  label: Optional[str],
                  concept_label: Optional[str],
                  properties: Optional[List[str]],
-                 values: Optional[List[str]]):
+                 values: Optional[List[str]],
+                 anchors: Optional[List[Dict[str, int]]] = None): # Добавлен anchors
         """
         Initializes the RichNode.
 
         Args:
             node_id: The unique identifier for the node.
-            label: The primary label derived from text anchors (same as in base Node).
-            concept_label: The original 'label' field from the PTG/EDS JSON,
-                           representing the underlying concept or type.
-            properties: A list of property keys associated with the node (e.g., 'sempos', 'frame').
-            values: A list of property values corresponding to the keys in 'properties'.
+            label: The primary label derived from text anchors.
+            concept_label: The original 'label' field from the PTG/EDS JSON.
+            properties: A list of property keys.
+            values: A list of property values.
+            anchors: List of anchor dictionaries (e.g., [{'from': 0, 'to': 5}]).
         """
         super().__init__(node_id=node_id, label=label)
         self.concept_label: Optional[str] = concept_label
-
         self.properties: List[str] = properties if properties is not None else []
         self.values: List[str] = values if values is not None else []
+        self.anchors: List[Dict[str, int]] = anchors if anchors is not None else [] # Сохраняем anchors
 
         self.attributes: Dict[str, str] = {}
         if self.properties and self.values and len(self.properties) == len(self.values):
             self.attributes = dict(zip(self.properties, self.values))
 
     def __repr__(self) -> str:
-        """Provides a string representation of the RichNode."""
         base_repr = super().__repr__()
         base_part = base_repr[:-1]
         parts = [
             f"concept_label='{self.concept_label}'",
             f"properties={self.properties}",
-            f"values={self.values}"
+            f"values={self.values}",
+            f"anchors={self.anchors}" # Добавлено в repr
         ]
         return f"{base_part}, {', '.join(parts)})"
 
@@ -99,6 +99,9 @@ class Edge:
         if self.attributes:
             parts.append(f"attributes={self.attributes}")
         return f"Edge({', '.join(parts)})"
+
+    def make_tuple(self):
+        return self.source
 
 
 class SemanticGraph:
